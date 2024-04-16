@@ -1,0 +1,52 @@
+[
+    {
+      "question": "What does HTML stand for?",
+      "options": ["Hyper Text Markup Language", "High Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
+      "answer": "Hyper Text Markup Language"
+    },
+    {
+      "question": "Which language is used for styling web pages?",
+      "options": ["HTML", "JQuery", "CSS", "XML"],
+      "answer": "CSS"
+    },
+    {
+      "question": "Which is not a JavaScript Framework?",
+      "options": ["Python Script", "JQuery", "Django", "NodeJS"],
+      "answer": "Python Script"
+    },
+    {
+      "question": "Which is used for Connect To Database?",
+      "options": ["PHP", "HTML", "JS", "All"],
+      "answer": "PHP"
+    },
+    {
+      "question": "Web pages starts with which of the following tag?",
+      "options": ["<Body>", "<Form>", "<HTML>", "<Div>"],
+      "answer": "<HTML>"
+    },
+    {
+      "question": "What does CSS stand for?",
+      "options": ["Cascading Style Sheet", "Colorful Style Sheet", "Creative Style Sheet", "Computer Style Sheet"],
+      "answer": "Cascading Style Sheet"
+    },
+    {
+      "question": "Which is not a programming language?",
+      "options": ["Python", "Java", "HTML", "C++"],
+      "answer": "HTML"
+    },
+    {
+      "question": "What does API stand for?",
+      "options": ["Application Programming Interface", "Advanced Programming Interface", "Application Performance Interface", "Advanced Performance Interface"],
+      "answer": "Application Programming Interface"
+    },
+    {
+      "question": "What does SQL stand for?",
+      "options": ["Structured Query Language", "Stylish Question Language", "Statements Question Language", "Stylish Query Language"],
+      "answer": "Structured Query Language"
+    },
+    {
+      "question": "What does JSON stand for?",
+      "options": ["JavaScript Object Notation", "JavaScript Object Network", "Java Standard Object Notation", "Java Source Open Network"],
+      "answer": "JavaScript Object Notation"
+    }
+  ]
