@@ -102,13 +102,13 @@ export default function Page() {
 
       <p className='font-mono text-red-500  absolute '>violation Count: {switchCount}</p>
 
-      {!showFullScreenPopup && (
+      {showFullScreenPopup && (
         <div className='flex-row '>
           <p className='font-mono font-semibold text-red-500 pb-3'>Message : Please take the test in full-screen mode and use Desktop or laptop.</p>
           <button onClick={enterFullScreen} className='bg-green-400 px-2 rounded-md hover:bg-green-500 text-white font-bold'>Enter Full Screen</button>
         </div>
       )}
-      {!isFullScreen && <div className='mx-3 mt-6 w-fit relative '>
+      {isFullScreen && <div className='mx-3 mt-6 w-fit relative '>
 
 
         <h4 className='mb-3 font-serif font-bold'>{"Q"}{questionNumber + 1 + ". " + questions[questionNumber].question}</h4>
