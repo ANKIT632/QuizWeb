@@ -12,7 +12,7 @@ export default function Page() {
 
 
   const [questionNumber, setQuestionNumber] = useState(localData.q || 0);
-
+  const [answer,setAnswers]=useState("");
 
 
   const addUserAnswer = (e) => {
@@ -100,14 +100,16 @@ export default function Page() {
   return (
     <div className=' flex justify-center'>
 
-      <p className='font-mono text-red-500  absolute '>violation Count: {switchCount}</p>
-
+<div className='flex flex-col ml-4'>
+      <p className='font-mono text-red-500   relative'>violation Count: {switchCount}</p>
       {showFullScreenPopup && (
         <div className='flex-row '>
           <p className='font-mono font-semibold text-red-500 pb-3'>Message : Please take the test in full-screen mode and use Desktop or laptop.</p>
           <button onClick={enterFullScreen} className='bg-green-400 px-2 rounded-md hover:bg-green-500 text-white font-bold'>Enter Full Screen</button>
         </div>
       )}
+
+      </div>  
       {isFullScreen && <div className='mx-3 mt-6 w-fit relative '>
 
 
