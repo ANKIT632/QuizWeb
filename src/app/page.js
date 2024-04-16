@@ -1,5 +1,6 @@
 "use client"
 
+import { setItem } from './utils/localStorage'
 import { useRouter } from 'next/navigation';
 
 
@@ -11,7 +12,7 @@ export default function Home() {
 
   const navigationToQuizPage = () => {
 
-    localStorage.setItem('data', JSON.stringify(data));
+    setItem('data', data);
     router.push('./quiz')
 
   }

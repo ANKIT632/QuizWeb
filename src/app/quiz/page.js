@@ -1,5 +1,5 @@
 "use client"
-
+import { setItem, getItem } from '../utils/localStorage'
 import React, { useState, useEffect } from 'react';
 import questions from '../constant/quiz.json';
 import { useRouter } from 'next/navigation';
@@ -8,11 +8,11 @@ import { useRouter } from 'next/navigation';
 export default function Page() {
 
   const router = useRouter();
-  let localData = JSON.parse(localStorage.getItem('data'));
+  let localData = getItem('data');
 
 
   const [questionNumber, setQuestionNumber] = useState(localData.q || 0);
-  const [answer,setAnswers]=useState("");
+  const [answer, setAnswers] = useState("");
 
 
   const addUserAnswer = (e) => {
@@ -21,7 +21,7 @@ export default function Page() {
     const arr = [...localData.ans];
     arr[questionNumber] = e.target.innerText;
     localData.ans = arr;
-    localStorage.setItem('data', JSON.stringify(localData));
+    setItem('data', localData);
     setAnswers(e.target.innerText);
 
   }
@@ -30,7 +30,9 @@ export default function Page() {
     e.preventDefault();
 
     localData.q = questionNumber + 1;
-    localStorage.setItem('data', JSON.stringify(localData));
+
+    setItem('data', localData);
+
     if (questionNumber != 10)
       setQuestionNumber(questionNumber + 1);
 
@@ -53,7 +55,7 @@ export default function Page() {
       if (document.visibilityState === 'hidden') {
 
         localData.v = switchCount + 1;
-        localStorage.setItem('data', JSON.stringify(localData));
+        setItem('data', localData);
         setSwitchCount((prevCount) => prevCount + 1);
 
       }
@@ -100,16 +102,16 @@ export default function Page() {
   return (
     <div className=' w-full flex-col justify-center '>
 
-<div className='flex flex-col ml-4'>
-      <p className='font-mono text-red-500  '>violation Count: {switchCount}</p>
-      {showFullScreenPopup && (
-        <div className='flex-row '>
-          <p className='font-mono font-semibold text-red-500 pb-3'>Message : Please take the test in full-screen mode and use Desktop or laptop.</p>
-          <button onClick={enterFullScreen} className='bg-green-400 px-2 rounded-md hover:bg-green-500 text-white font-bold'>Enter Full Screen</button>
-        </div>
-      )}
+      <div className='flex flex-col ml-4'>
+        <p className='font-mono text-red-500  '>violation Count: {switchCount}</p>
+        {showFullScreenPopup && (
+          <div className='flex-row '>
+            <p className='font-mono font-semibold text-red-500 pb-3'>Message : Please take the test in full-screen mode and use Desktop or laptop.</p>
+            <button onClick={enterFullScreen} className='bg-green-400 px-2 rounded-md hover:bg-green-500 text-white font-bold'>Enter Full Screen</button>
+          </div>
+        )}
 
-      </div>  
+      </div>
       {isFullScreen && <div className='mx-3 mt-6 w-fit flex-row justify-center'>
 
 
