@@ -98,10 +98,10 @@ export default function Page() {
 
 
   return (
-    <div className=' flex justify-center'>
+    <div className=' w-full flex-col justify-center '>
 
 <div className='flex flex-col ml-4'>
-      <p className='font-mono text-red-500   relative'>violation Count: {switchCount}</p>
+      <p className='font-mono text-red-500  '>violation Count: {switchCount}</p>
       {showFullScreenPopup && (
         <div className='flex-row '>
           <p className='font-mono font-semibold text-red-500 pb-3'>Message : Please take the test in full-screen mode and use Desktop or laptop.</p>
@@ -110,7 +110,7 @@ export default function Page() {
       )}
 
       </div>  
-      {isFullScreen && <div className='mx-3 mt-6 w-fit relative '>
+      {isFullScreen && <div className='mx-3 mt-6 w-fit flex-row justify-center'>
 
 
         <h4 className='mb-3 font-serif font-bold'>{"Q"}{questionNumber + 1 + ". " + questions[questionNumber].question}</h4>
