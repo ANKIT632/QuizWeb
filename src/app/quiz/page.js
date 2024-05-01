@@ -48,7 +48,7 @@ export default function Page() {
   }
 
 
-  const [switchCount, setSwitchCount] = useState(localData.v || 0);
+  const [switchCount, setSwitchCount] = useState(localData?.v || 0);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [showFullScreenPopup, setShowFullScreenPopup] = useState(false);
 
