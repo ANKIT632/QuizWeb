@@ -30,7 +30,7 @@ export default function Page() {
   const nextQuestionHandller = (e) => {
     e.preventDefault();
 
-    localData.q = questionNumber + 1;
+    localData.ques = questionNumber + 1;
 
     setItem('data', localData);
 
