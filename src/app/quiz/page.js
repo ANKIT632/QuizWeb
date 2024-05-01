@@ -1,4 +1,5 @@
 "use client"
+//react-hooks/exhaustive-deps
 import { setItem, getItem } from '../utils/localStorage'
 import React, { useState, useEffect } from 'react';
 import questions from '../constant/quiz.json';
