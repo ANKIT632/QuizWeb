@@ -11,8 +11,9 @@ export default function Page() {
   const router = useRouter();
   let localData = getItem('data');
 
+  const q=localData.ques!==undefined?localData.ques:0;
 
-  const [questionNumber, setQuestionNumber] = useState(localData.ques || 0);
+  const [questionNumber, setQuestionNumber] = useState(q || 0);
   const [answer, setAnswers] = useState("");
 
 

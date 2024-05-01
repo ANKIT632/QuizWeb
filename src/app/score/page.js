@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from 'react'
 import questions from '../constant/quiz.json';
 import { useRouter } from 'next/navigation';
+import { getItem } from '../utils/localStorage';
 
 
 function Page() {
 
   const router = useRouter();
 
-  const data = JSON.parse(localStorage.getItem('data'));
+  const data = getItem('data');
   const [score, setScore] = useState(0);
 
   useEffect(() => {
