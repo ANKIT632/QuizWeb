@@ -12,7 +12,7 @@ export default function Page() {
   let localData = getItem('data');
 
 
-  const [questionNumber, setQuestionNumber] = useState(localData.q || 0);
+  const [questionNumber, setQuestionNumber] = useState(localData.ques || 0);
   const [answer, setAnswers] = useState("");
 
 
