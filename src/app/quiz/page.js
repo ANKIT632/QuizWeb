@@ -21,7 +21,12 @@ export default function Page() {
 
   const [isFullScreen, setIsFullScreen] = useState(false);
 
+
+
   useEffect(() => {
+    if(document.fullscreenElement!==null)
+    setIsFullScreen(true);
+
     function handleFullScreenChange() {
       setIsFullScreen(document.fullscreenElement != null);
     }
@@ -39,28 +44,17 @@ export default function Page() {
    
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("fullscreenchange", handleFullScreenChange);
-    document.addEventListener("webkitfullscreenchange", handleFullScreenChange);
-    document.addEventListener("mozfullscreenchange", handleFullScreenChange);
-    document.addEventListener("MSFullscreenChange", handleFullScreenChange);
-
     return () => {
+    
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("fullscreenchange", handleFullScreenChange);
-      document.removeEventListener("webkitfullscreenchange", handleFullScreenChange);
-      document.removeEventListener("mozfullscreenchange", handleFullScreenChange);
-      document.removeEventListener("MSFullscreenChange", handleFullScreenChange);
+;
     };
   }, []);
 
   const enterFullScreen = () => {
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-      document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-      document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-      document.documentElement.msRequestFullscreen();
     }
   };
 
@@ -103,7 +97,7 @@ export default function Page() {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
-
+          localData= getItem('data');
        localData.v = switchCount + 1;
 
         setItem('data',localData);
