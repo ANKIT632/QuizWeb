@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 //react-hooks/exhaustive-deps
 import { setItem, getItem } from '../utils/localStorage'
@@ -15,25 +16,73 @@ export default function Page() {
 
   const [questionNumber, setQuestionNumber] = useState(localData?.ques || 0);
   const [answer, setAnswers] = useState("");
+  const [switchCount, setSwitchCount] = useState(localData?.v || 0);
+
+
+  const [isFullScreen, setIsFullScreen] = useState(document.fullscreenElement != null);
+
+  useEffect(() => {
+    function handleFullScreenChange() {
+      setIsFullScreen(document.fullscreenElement != null);
+    }
+
+    function handleKeyDown(event) {
+      if (event.key === "F11") {
+        event.preventDefault();
+        if (!document.fullscreenElement) {
+          enterFullScreen();
+        } else if (document.exitFullscreen) {
+          document.exitFullscreen(); 
+        }
+      }
+    }
+   
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("fullscreenchange", handleFullScreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullScreenChange);
+    document.addEventListener("mozfullscreenchange", handleFullScreenChange);
+    document.addEventListener("MSFullscreenChange", handleFullScreenChange);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("fullscreenchange", handleFullScreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullScreenChange);
+      document.removeEventListener("mozfullscreenchange", handleFullScreenChange);
+      document.removeEventListener("MSFullscreenChange", handleFullScreenChange);
+    };
+  }, []);
+
+  const enterFullScreen = () => {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+      document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+      document.documentElement.msRequestFullscreen();
+    }
+  };
 
 
   const addUserAnswer = (e) => {
 
     e.preventDefault();
-    const arr = [...localData.ans];
+    const arr = localData.ans;
     arr[questionNumber] = e.target.innerText;
     localData.ans = arr;
-    setItem('data', localData);
+    setItem('data',localData);
     setAnswers(e.target.innerText);
 
   }
+
 
   const nextQuestionHandller = (e) => {
     e.preventDefault();
 
     localData.ques = questionNumber + 1;
 
-    setItem('data', localData);
+    setItem('data',localData);
 
     if (questionNumber != 10)
       setQuestionNumber(questionNumber + 1);
@@ -48,16 +97,17 @@ export default function Page() {
   }
 
 
-  const [switchCount, setSwitchCount] = useState(localData?.v || 0);
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  const [showFullScreenPopup, setShowFullScreenPopup] = useState(false);
+
+
 
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
 
-        localData.v = switchCount + 1;
-        setItem('data', localData);
+       localData.v = switchCount + 1;
+
+        setItem('data',localData);
+        
         setSwitchCount((prevCount) => prevCount + 1);
 
       }
@@ -70,33 +120,9 @@ export default function Page() {
     };
   }, []);
 
-  useEffect(() => {
-    const handleFullScreenChange = () => {
-      setIsFullScreen(!!document.fullscreenElement);
-    };
 
-    document.addEventListener('fullscreenchange', handleFullScreenChange);
 
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullScreenChange);
-    };
-  }, []);
-
-  const enterFullScreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen()
-        .then(() => setIsFullScreen(true))
-        .catch((err) => console.error('Error attempting to enable full-screen mode:', err));
-    }
-  };
-
-  useEffect(() => {
-    if (!isFullScreen) {
-      setShowFullScreenPopup(true);
-    } else {
-      setShowFullScreenPopup(false);
-    }
-  }, [isFullScreen]);
+ 
 
 
 
@@ -106,17 +132,17 @@ export default function Page() {
 
       <div className='flex flex-col ml-4'>
         <p className='font-mono text-red-500  '>violation Count: {switchCount}</p>
-        {showFullScreenPopup && (
-          <div className='flex-row '>
-            <p className='font-mono font-semibold text-red-500 pb-3'>Message : Please take the test in full-screen mode and use Desktop or laptop.</p>
-            <button onClick={enterFullScreen} className='bg-green-400 px-2 rounded-md hover:bg-green-500 text-white font-bold'>Enter Full Screen</button>
-          </div>
-        )}
-
+  
       </div>
+
+      {!isFullScreen && (
+        <button onClick={enterFullScreen} className='p-1.5 bg-blue-400 rounded-lg ml-5'>Click Full Screen</button>
+      )}
+
+
       {isFullScreen && <div className='mx-3 mt-6 w-fit flex-row justify-center'>
 
-
+                
         <h4 className='mb-3 font-serif font-bold'>{"Q"}{questionNumber + 1 + ". " + questions[questionNumber].question}</h4>
         {
 
