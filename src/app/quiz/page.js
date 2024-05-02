@@ -19,7 +19,7 @@ export default function Page() {
   const [switchCount, setSwitchCount] = useState(localData?.v || 0);
 
 
-  const [isFullScreen, setIsFullScreen] = useState(document.fullscreenElement != null);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   useEffect(() => {
     function handleFullScreenChange() {
